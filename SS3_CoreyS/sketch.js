@@ -1,4 +1,4 @@
-// Author: [Your Name]
+// Author: Corey SPitzer 
 // Title: Reactive Patterns
 // Description: This sketch creates a dynamic and random set of patterns that respond to mouse movements and keyboard inputs. 
 // The random colors and shapes are triggered using conditional statements and mouse interactions to create an engaging experience.
