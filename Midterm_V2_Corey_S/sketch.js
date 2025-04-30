@@ -1,3 +1,8 @@
+// Midterm_V2_CoreyS
+// Theme: Night Sky
+// This sketch represents a starry night sky with an image of a moon that changes position over time. 
+// Instructions: The moon image moves across the canvas, and the background changes color every 5 seconds. 
+// Press the mouse to change the moon's direction.
 let shapeSize = 50;
 let shapeColor;
 let circleSize = 20;
