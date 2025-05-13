@@ -1,5 +1,5 @@
-// Name: Your Name
-// Title: Dodge the Yellow Balls
+// Name: Corey Spitzer
+// Title: Corey_S_SS7
 // Instructions: Dodge the yellow objects! Click "Restart" to reset the game.
 
 class BouncingBall {
