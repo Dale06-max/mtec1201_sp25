@@ -1,4 +1,4 @@
-// Name: Your Name
+// Name: Corey Spitzer 
 // Title: Bouncing Balls with Instructions and Restart
 // Instructions: Dodge the yellow objects! Click "Restart" to reset the game.
 
