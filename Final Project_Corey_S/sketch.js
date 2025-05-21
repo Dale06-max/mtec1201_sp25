@@ -1,5 +1,5 @@
-// Name: Corey Spitzer 
-// Title: Racing Game 
+// Name: Corey Spitzer
+// Title: Racing Game
 // Instructions: Dodge the yellow objects! Click "Restart" to reset the game.
 
 let car;
@@ -12,6 +12,11 @@ let lives = 3;
 let laneLines = [];
 let score = 0;
 let highScore = 0;
+let carSound;
+
+function preload() {
+  carSound = loadSound('car_engine.mp3'); // Place the file in your project directory
+}
 
 function setup() {
   createCanvas(400, 600);
@@ -21,12 +26,11 @@ function setup() {
   startButton.position(width / 2 - 40, height / 2);
   startButton.mousePressed(startGame);
 
-restartButton = createButton('Restart Game');
-restartButton.position(width / 2 - 50, height / 2 + 100); 
-restartButton.style('font-size', '16px');
-restartButton.style('padding', '10px 20px');
-restartButton.mousePressed(restartGame);
-restartButton.hide();
+  restartButton = createButton('Restart Game');
+  restartButton.position(width / 2 - 50, height / 2 + 40);
+  restartButton.mousePressed(restartGame);
+  restartButton.hide();
+
   for (let i = 0; i < height; i += 40) {
     laneLines.push(i);
   }
@@ -38,18 +42,26 @@ function startGame() {
   startButton.hide();
   restartButton.hide();
   lives = 3;
-  score = 0;
   obstacles = [];
+  score = 0;
+
+  if (carSound && !carSound.isPlaying()) {
+    carSound.loop();
+  }
 }
 
 function restartGame() {
   car = new Car();
   obstacles = [];
   lives = 3;
-  score = 0;
   gameStarted = true;
   gameOverFlag = false;
+  score = 0;
   restartButton.hide();
+
+  if (carSound && !carSound.isPlaying()) {
+    carSound.loop();
+  }
 }
 
 function draw() {
@@ -62,10 +74,6 @@ function draw() {
 
     if (frameCount % 60 === 0) {
       obstacles.push(new Obstacle());
-    }
-
-    if (frameCount % 10 === 0) {
-      score++;
     }
 
     for (let i = obstacles.length - 1; i >= 0; i--) {
@@ -84,13 +92,14 @@ function draw() {
       }
     }
 
+    score++;
+
     fill(255);
     textSize(16);
     textAlign(LEFT);
     text("Lives: " + lives, 10, 20);
     text("Score: " + score, 10, 40);
     text("High Score: " + highScore, 10, 60);
-
   } else if (!gameStarted) {
     fill(255);
     textAlign(CENTER);
@@ -105,10 +114,6 @@ function draw() {
     fill(255);
     textSize(20);
     text("Press 'R' to Restart the game", width / 2, height / 2 + 10);
-
-    textSize(18);
-    text("Final Score: " + score, width / 2, height / 2 + 40);
-    text("High Score: " + highScore, width / 2, height / 2 + 65);
 
     restartButton.show();
   }
@@ -134,13 +139,14 @@ function endGame() {
   gameOverFlag = true;
   gameStarted = false;
 
+  if (carSound && carSound.isPlaying()) {
+    carSound.stop();
+  }
+
   if (score > highScore) {
     highScore = score;
   }
-
-  restartButton.show(); 
 }
-
 
 function keyPressed() {
   if (keyCode === LEFT_ARROW) {
@@ -168,11 +174,8 @@ class Car {
   }
 
   show() {
-    fill(0, 150, 255);         
-    stroke(255);               
-    strokeWeight(2);
-    rect(this.x, this.y, this.w, this.h, 10);  
-    noStroke();               
+    fill(0, 200, 255);
+    rect(this.x, this.y, this.w, this.h, 5);
   }
 
   setDir(dir) {
@@ -181,7 +184,7 @@ class Car {
 
   move() {
     this.x += this.dir * 5;
-    this.x = constrain(this.x, 100, 260); // Stay on road
+    this.x = constrain(this.x, 100, 260);
   }
 }
 
@@ -199,7 +202,7 @@ class Obstacle {
   }
 
   show() {
-    fill(255, 204, 0); // Yellow obstacle
+    fill(255, 255, 0);
     rect(this.x, this.y, this.w, this.h, 5);
   }
 
