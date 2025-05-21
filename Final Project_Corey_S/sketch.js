@@ -14,9 +14,6 @@ let score = 0;
 let highScore = 0;
 let carSound;
 
-function preload() {
-  carSound = loadSound('car_engine.mp3'); // Place the file in your project directory
-}
 
 function setup() {
   createCanvas(400, 600);
